@@ -1,23 +1,22 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityStandardAssets.Characters.FirstPerson;
 
 public static class SaveSystem {
 
-    public static void SavePlayer (FirstPersonController FirstPersonController)
+    public static void SavePlayer (Stats stats)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.savedata";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        Save save = new Save(FirstPersonController);
+        playerData data = new playerData(stats);
 
-        formatter.Serialize(stream, save);
+        formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static Save LoadPlayer()
+    public static playerData LoadPlayer()
     {
         string path = Application.persistentDataPath + "/player.savedata";
         if (File.Exists(path))
@@ -25,10 +24,10 @@ public static class SaveSystem {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            Save save = formatter.Deserialize(stream) as Save;
+            playerData data = formatter.Deserialize(stream) as playerData;
             stream.Close();
 
-            return save;
+            return data;
         }
         else
         {

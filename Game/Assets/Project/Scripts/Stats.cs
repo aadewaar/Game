@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
@@ -35,5 +32,23 @@ public class Stats : MonoBehaviour
     private void OnGUI()
     {
         GUI.Box(new Rect(10, 10, 70, 30), "H" + curHealth);
+    }
+    public void SavePlayer()
+    {
+        Debug.Log("saving...");
+        SaveSystem.SavePlayer(this);
+    }
+    public void LoadPlayer()
+    {
+        Debug.Log("loading...");
+        playerData data = SaveSystem.LoadPlayer();
+
+        health = curHealth;
+
+        Vector3 position;
+        position.x = data.position[0];
+        position.y = data.position[1];
+        position.z = data.position[2];
+        transform.position = position;
     }
 }
