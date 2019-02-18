@@ -18,12 +18,16 @@ public class Stats : MonoBehaviour
         if (curHealth <= 0)
         {
             curHealth = health;
-
+            if(curHealth == 0)
+            {
+                LoadPlayer();
+            }
         }
         if (curHealth > health)
         {
             curHealth = health;
         }
+        
     }
     void regen()
     {

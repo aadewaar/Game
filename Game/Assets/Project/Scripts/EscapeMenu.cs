@@ -37,8 +37,10 @@ public class EscapeMenu : MonoBehaviour {
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        //SceneManager.LoadScene("Menu");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Menu");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void QuitGame()
